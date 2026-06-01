@@ -2,6 +2,7 @@
 
 Manejo deGit y Git Hub
 
+```	bash
 git --version
 git config --global user.name "Carolina Muñoz"		--(global a nivel de toda la máquina
 git config --global core.editor "code --wait"
@@ -20,3 +21,4 @@ git remote add origin https://github.com/cnmunioz/2260519.git
 git remote -v     --- Ver cual es el repositorio remoto
 git status   --- estado actal del repositorio
 
+```	
