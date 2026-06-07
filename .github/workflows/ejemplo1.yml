@@ -19,8 +19,8 @@ jobs:
         env:
           SPRING_PROFILES_ACTIVE: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-      - name: Ejecutando app Spring Boot
-        run: mvn spring-boot:run
+      - name: Verificar inicio de app Spring Boot
+        run: mvn verify
         env:
           SPRING_PROFILES_ACTIVE: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
