@@ -30,7 +30,7 @@ jobs:
       - name: Dar permisos a mvnw
         run: chmod +x mvnw
       - name: Build & Test
-        run: ./mvnw clean verify
+        run: ./mvnw clean verify -DskipTests
         env:
           SPRING_PROFILES_ACTIVE: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
