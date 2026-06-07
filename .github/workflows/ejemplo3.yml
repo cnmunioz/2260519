@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        java: [25, 26]
+        java: [25, 25]
     name: Java ${{ matrix.java }} en el S.O. ${{ matrix.os }}
     steps:
       - name: Clonando mi repositorio
