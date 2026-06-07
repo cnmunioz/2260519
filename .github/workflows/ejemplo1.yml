@@ -24,3 +24,14 @@ jobs:
         env:
           SPRING_PROFILES_ACTIVE: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      - name: Iniciar Spring Boot en background
+        run: mvn spring-boot:run &
+        env:
+          SPRING_PROFILES_ACTIVE: dev
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      - name: Esperar y probar
+        run: |
+          sleep 10
+          curl -i http://localhost:8080/hola2
+      - name: Detener app StringBoot
+        run: pkill -f 'org.springframework.boot.loader.JarLauncher'
