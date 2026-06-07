@@ -8,7 +8,6 @@ class EjemplogitApplicationTests {
 
 	@Test
 	void contextLoads() {
-		assertTrue(true);
 	}
 
 }
