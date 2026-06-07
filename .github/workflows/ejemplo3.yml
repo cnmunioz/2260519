@@ -27,5 +27,10 @@ jobs:
           key: ${{ runner.os }}-maven-${{hashFiles('**/pom.xml')}}
           restore-keys: |
             {{ runner.os }}-maven-
+      - name: Dar permisos a mvnw
+        run: chmod +x mvnw
       - name: Build & Test
         run: ./mvnw clean verify
+        env:
+          SPRING_PROFILES_ACTIVE: dev
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
