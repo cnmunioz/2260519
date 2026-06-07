@@ -1,0 +1,31 @@
+name: MatrixBuilds - Build & Test - SpringBoot
+on:
+    push:
+      branches: [main]
+    pull_request:
+      branches: [main]
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        java: [25, 26]
+    name: Java ${{ matrix.java }} en el S.O. ${{ matrix.os }}
+    steps:
+      - name: Clonando mi repositorio
+        uses: actions/checkout@v4
+      - name: Configurando JDK ${{ matrix.java }}
+        uses: actions/setup-java@v5.2.0
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'temurin'
+      - name: Cacheando paquetes maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{hashFiles('**/pom.xml')}}
+          restore-keys: |
+            {{ runner.os }}-maven-
+      - name: Build & Test
+        run: ./mvnw clean verify
