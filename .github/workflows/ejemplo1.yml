@@ -16,3 +16,8 @@ jobs:
             distribution: 'temurin'
       - name: Compilando mediante Maven
         run: mvn clean install -DskipTests
+      - name: Ejecutando app Spring Boot
+        run: mvn spring-boo:run
+        env:
+          SPRING_PROFILES_ACTIVE: dev
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
