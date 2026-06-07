@@ -35,4 +35,4 @@ jobs:
           sleep 10
           curl -i http://localhost:8080/hola2
       - name: Detener app StringBoot
-        run: kill -9 ${cat springboot.pid}
+        run: kill -9 $(cat springboot.pid)
