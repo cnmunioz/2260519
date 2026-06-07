@@ -15,7 +15,7 @@ jobs:
             java-version: '25'
             distribution: 'temurin'
       - name: Compilando mediante Maven
-        run: mvn clean install -DskipTests
+        run: mvn clean install
         env:
           SPRING_PROFILES_ACTIVE: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}

@@ -11,6 +11,6 @@ public class HolaControllerTest {
     void testHolaController(){
         HolaController controller = new HolaController();
         String respuesta = controller.saludar();
-        assertEquals("Hola desde Spring Boot!!!", respuesta);
+        assertEquals("Hola Mundo desde Spring Boot", respuesta);
     }
 }
