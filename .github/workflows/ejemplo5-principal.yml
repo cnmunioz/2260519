@@ -1,0 +1,49 @@
+name: Principal que usa plantilla
+on:
+  push:
+    branches:
+      - develops
+      - main
+  pull_request:
+    branches:
+      - develops
+      - main
+jobs:
+  pruebita:
+    uses: ./.github/workflows/ejemplo5.yml
+    with:
+      java-version: '25'
+  deploy-staging:
+    needs: pruebita
+    if: github.ref == 'refs/heads/develop'
+    runs-on: windows-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compilando el *.jar
+        run: mvn clean package -DskipTest
+        env:
+          SPRING_PROFILES_ACTIVE: dev
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      - name: Deploy a staging
+        run:
+          echo "Deploy a STAGING..."
+          # curl -X POST https://stagging.miapi.com/deploy -H "Authorization: Bearer ${{ secrets.STAGING_TOKEN }}"
+  deplot-prod:
+    needs: pruebita
+    if: github.ref == 'refs/heads/main'
+    runs-on: windows-latest
+    environment:
+      name: production
+      url: https://miapi.com
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compilando el *.jar
+        run: mvn clean package -DskipTest
+        env:
+          SPRING_PROFILES_ACTIVE: dev
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      - name: Deploy a producción
+        run:
+          echo "Deploy a STAGING..."
+        # curl -X POST https://stagging.miapi.com/deploy -H "Authorization: Bearer ${{ secrets.PROD_TOKEN }}"
