@@ -20,13 +20,13 @@ jobs:
     environment: staging
     steps:
       - uses: actions/checkout@v4
+      - name: Dar permisos a mvnw
+        run: chmod +x mvnw
       - name: Compilando el *.jar
         run: mvn clean package -DskipTest
         env:
           SPRING_PROFILES_ACTIVE: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-      - name: Dar permisos a mvnw
-        run: chmod +x mvnw
       - name: Deploy a staging
         run:
           echo "Deploy a STAGING..."
