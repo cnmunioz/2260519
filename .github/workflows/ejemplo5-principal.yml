@@ -25,6 +25,8 @@ jobs:
         env:
           SPRING_PROFILES_ACTIVE: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      - name: Dar permisos a mvnw
+        run: chmod +x mvnw
       - name: Deploy a staging
         run:
           echo "Deploy a STAGING..."
@@ -43,6 +45,8 @@ jobs:
         env:
           SPRING_PROFILES_ACTIVE: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      - name: Dar permisos a mvnw
+        run: chmod +x mvnw
       - name: Deploy a producción
         run:
           echo "Deploy a STAGING..."
