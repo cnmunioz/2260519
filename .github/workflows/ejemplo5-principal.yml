@@ -20,10 +20,8 @@ jobs:
     environment: staging
     steps:
       - uses: actions/checkout@v4
-      - name: Dar permisos a mvnw
-        run: chmod +x mvnw
       - name: Compilando el *.jar
-        run: mvn clean package -DskipTest
+        run: mvnw.cmd clean package -DskipTests
         env:
           SPRING_PROFILES_ACTIVE: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
@@ -40,10 +38,8 @@ jobs:
       url: https://miapi.com
     steps:
       - uses: actions/checkout@v4
-      - name: Dar permisos a mvnw
-        run: chmod +x mvnw
       - name: Compilando el *.jar
-        run: mvn clean package -DskipTest
+        run: mvnw.cmd clean package -DskipTests
         env:
           SPRING_PROFILES_ACTIVE: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
