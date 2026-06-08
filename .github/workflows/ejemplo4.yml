@@ -30,7 +30,8 @@ jobs:
           SPRING_PROFILES_ACTIVE: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       - name: Ejecutando análisis estático de código
-        run: mvn sonar: sonar \
+        run: |
+          mvn sonar: sonar \
           -Dsonar.projectKey=cnmunioz_2260519 \
           -Dsonar.organization=cnmunioz \
           -Dsonar.host.url=https://sonarcloud.io
