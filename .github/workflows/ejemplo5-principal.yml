@@ -2,11 +2,11 @@ name: Principal que usa plantilla
 on:
   push:
     branches:
-      - develops
+      - develop
       - main
   pull_request:
     branches:
-      - develops
+      - develop
       - main
 jobs:
   pruebita:
@@ -20,16 +20,21 @@ jobs:
     environment: staging
     steps:
       - uses: actions/checkout@v4
+      - name: Configurando JDK
+        uses: actions/setup-java@v5.2.0
+        with:
+          java-version: '25'
+          distribution: 'temurin'
       - name: Compilando el *.jar
-        run: mvnw.cmd clean package -DskipTests
+        run: ./mvnw clean package -DskipTests
         env:
           SPRING_PROFILES_ACTIVE: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       - name: Deploy a staging
-        run:
+        run: |
           echo "Deploy a STAGING..."
-          # curl -X POST https://stagging.miapi.com/deploy -H "Authorization: Bearer ${{ secrets.STAGING_TOKEN }}"
-  deplot-prod:
+          # curl -X POST https://staging.miapi.com/deploy -H "Authorization: Bearer ${{ secrets.STAGING_TOKEN }}"
+  deploy-prod:
     needs: pruebita
     if: github.ref == 'refs/heads/main'
     runs-on: windows-latest
@@ -38,12 +43,17 @@ jobs:
       url: https://miapi.com
     steps:
       - uses: actions/checkout@v4
+      - name: Configurando JDK
+        uses: actions/setup-java@v5.2.0
+        with:
+          java-version: '25'
+          distribution: 'temurin'
       - name: Compilando el *.jar
-        run: mvnw.cmd clean package -DskipTests
+        run: ./mvnw clean package -DskipTests
         env:
           SPRING_PROFILES_ACTIVE: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       - name: Deploy a producción
-        run:
-          echo "Deploy a STAGING..."
-        # curl -X POST https://stagging.miapi.com/deploy -H "Authorization: Bearer ${{ secrets.PROD_TOKEN }}"
+        run: |
+          echo "Deploy a PRODUCCIÓN..."
+          # curl -X POST https://prod.miapi.com/deploy -H "Authorization: Bearer ${{ secrets.PROD_TOKEN }}"
