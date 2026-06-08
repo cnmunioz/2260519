@@ -31,10 +31,11 @@ jobs:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       - name: Ejecutando análisis estático de código
         run: |
-          mvn sonar:sonar \
+          mvnw sonar:sonar \
           -Dsonar.projectKey=cnmunioz_2260519 \
           -Dsonar.organization=cnmunioz \
           -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.login=$SONAR_TOKEN
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
