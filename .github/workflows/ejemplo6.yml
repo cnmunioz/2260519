@@ -24,7 +24,7 @@ jobs:
           SPRING_PROFILES_ACTIVE: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       - name: Subir JAR a workflow artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: springboot-app
           path: target/*.jar
