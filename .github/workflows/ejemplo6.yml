@@ -18,6 +18,8 @@ jobs:
         with:
           java-version: '25'
           distribution: 'temurin'
+      - name: Dar permisos a mvnw
+        run: chmod +x mvnw
       - name: Compilando el *.jar
         run: ./mvnw clean package -DskipTests
         env:
